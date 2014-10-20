@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 121e2d3ec6a31a963338ece7367f67b6)
+version = "0.0.1"
+description = "Implementation of several spatial indexes"
+requires = "threads core"
+archive(byte) = "SpatialIndex.cma"
+archive(byte, plugin) = "SpatialIndex.cma"
+archive(native) = "SpatialIndex.cmxa"
+archive(native, plugin) = "SpatialIndex.cmxs"
+exists_if = "SpatialIndex.cma"
+# OASIS_STOP
+
