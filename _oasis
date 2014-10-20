@@ -1,0 +1,28 @@
+OASISFormat: 0.4
+Name:        SpatialIndex
+Version:     0.0.1
+Synopsis:    Implementation of several spatial indexes
+Authors:     Alexander Dinu
+License:     BSD-3-clause
+Plugins:     META (0.4), DevFiles (0.4)
+BuildTools: ocamlbuild
+
+Library "SpatialIndex"
+  Path: src
+  Pack: true
+  Modules: RStarTree
+  BuildDepends: threads, core
+
+Executable test_rstartree
+  Path: test
+  MainIs: test_rstartree.ml
+  Build$: flag(tests)
+  CompiledObject: best
+  Install: false
+  BuildDepends: SpatialIndex, oUnit
+
+Test "RStarTreeTest"
+  WorkingDirectory: test
+  Run$: flag(tests)
+  TestTools: test_rstartree
+  Command: $test_rstartree
