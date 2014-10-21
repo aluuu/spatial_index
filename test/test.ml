@@ -18,7 +18,8 @@ and flatten = function
 let all_tests () =
   flatten
     (TestList
-       [Test_boundingbox.test])
+       [Test_boundingbox.test;
+        Test_rtree.test])
 
 let main () =
   ignore (run_test_tt_main
