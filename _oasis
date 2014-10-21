@@ -10,19 +10,19 @@ BuildTools: ocamlbuild
 Library "SpatialIndex"
   Path: src
   Pack: true
-  Modules: RStarTree
+  Modules: RTree, RStarTree
   BuildDepends: threads, core
 
-Executable test_rstartree
+Executable test
   Path: test
-  MainIs: test_rstartree.ml
+  MainIs: test.ml
   Build$: flag(tests)
   CompiledObject: best
   Install: false
   BuildDepends: SpatialIndex, oUnit
 
-Test "RStarTreeTest"
+Test "SpatialIndexTest"
   WorkingDirectory: test
   Run$: flag(tests)
-  TestTools: test_rstartree
-  Command: $test_rstartree
+  TestTools: test
+  Command: $test
