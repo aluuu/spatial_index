@@ -1,8 +1,6 @@
 open Core.Std
 open OUnit
-open SpatialIndex.RTree
-
-open BoundingBox
+open SpatialIndex.BoundingBox
 
 let test =
   "BoundingBox" >::: [
