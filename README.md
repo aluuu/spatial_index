@@ -1,7 +1,7 @@
 SpatialIndex - Implementation of several spatial indexes
 ========================================================
 
-See the file [INSTALL.txt](INSTALL.txt) for building and installation
+See the file [INSTALL.md](INSTALL.md) for building and installation
 instructions.
 
 References
