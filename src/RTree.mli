@@ -16,11 +16,23 @@ type 'a t = Empty |
 
 val empty_node: BoundingBox.t * 'a t
 
+val bounding_box_of_nodes: (BoundingBox.t * 'b) list -> BoundingBox.t
+
+val bounding_box_delta: BoundingBox.t -> BoundingBox.t -> float
+
+val bounding_box_distance:
+  (BoundingBox.t * 'b) -> (BoundingBox.t * 'b) -> float
+
 val size: 'a t -> int
 
 val partition_by_min_delta:
   (BoundingBox.t * 'a t) list -> BoundingBox.t ->
   (BoundingBox.t * 'a t) * (BoundingBox.t * 'a t) list
+
+val quadratic_split:
+  (BoundingBox.t * 'a) list ->
+  (BoundingBox.t * (BoundingBox.t * 'a) list) *
+    (BoundingBox.t * (BoundingBox.t *'a) list)
 
 val insert':
   'a t -> BoundingBox.t -> 'a ->
