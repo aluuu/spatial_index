@@ -10,7 +10,7 @@ BuildTools: ocamlbuild
 Library "SpatialIndex"
   Path: src
   Pack: true
-  Modules: BoundingBox, RTree, RStarTree
+  Modules: BoundingBox, RTree, RTree_intf, RStarTree
   BuildDepends: threads, core
 
 Executable test
