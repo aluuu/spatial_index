@@ -2,11 +2,13 @@ open Core.Std
 
 module BoundingBox = BoundingBox
 
-let max_nodes = 2
+let max_nodes = 8
 
 type 'a t = Empty |
             Node of (BoundingBox.t * 'a t) list |
             Leaf of (BoundingBox.t * 'a) list
+
+let empty = Empty
 
 let empty_node = (BoundingBox.empty, Empty)
 

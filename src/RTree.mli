@@ -14,6 +14,8 @@ type 'a t = Empty |
             Node of (BoundingBox.t * 'a t) list |
             Leaf of (BoundingBox.t * 'a) list
 
+val empty: 'a t
+
 val empty_node: BoundingBox.t * 'a t
 
 val bounding_box_of_nodes: (BoundingBox.t * 'b) list -> BoundingBox.t
