@@ -27,5 +27,6 @@ opam --git-version
 opam init git://github.com/ocaml/opam-repository >/dev/null 2>&1
 opam install ${OPAM_DEPENDS}
 eval `opam config env`
+./configure --enable-tests
 make test
 make clean
