@@ -42,6 +42,4 @@ val insert':
 
 val insert: 'a t -> Bounding_box.t -> 'a -> 'a t
 
-val delete: 'a t -> 'a -> 'a t
-
 val search: 'a t -> Bounding_box.t -> 'a list

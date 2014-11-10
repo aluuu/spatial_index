@@ -131,9 +131,6 @@ let insert tree bb record =
   | (_, n), (_, Empty) -> n
   | n, m -> Node [n; m]
 
-let delete tree record =
-  failwith "not implemented"
-
 let rec search tree bb =
   let filter_overlapping bb nodes =
     List.filter ~f:(fun (bb', _) -> Bounding_box.overlaps bb' bb) nodes in

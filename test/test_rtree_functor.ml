@@ -53,12 +53,8 @@ let test_lookup () =
   assert_equal (Some "e") (lookup "e" found_4);
   assert_equal (Some "f") (lookup "f" found_4)
 
-let test_delete () =
-  failwith "not implemented"
-
 let test =
   "RTree functor" >::: [
     "insert" >:: test_insert;
     "lookup" >:: test_lookup;
-    "delete" >:: test_delete
   ];;

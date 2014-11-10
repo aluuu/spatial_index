@@ -14,5 +14,4 @@ module Make(B: Boundable) =
     let size = Rtree.size
     let insert t a = Rtree.insert t (B.bounding_box a) a
     let search = Rtree.search
-    let delete = Rtree.delete
   end
