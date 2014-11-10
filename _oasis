@@ -1,5 +1,5 @@
 OASISFormat: 0.4
-Name:        SpatialIndex
+Name:        spatial_index
 Version:     0.0.1
 Synopsis:    Implementation of several spatial indexes
 Authors:     Alexander Dinu
@@ -7,10 +7,10 @@ License:     BSD-3-clause
 Plugins:     META (0.4), DevFiles (0.4)
 BuildTools: ocamlbuild
 
-Library "SpatialIndex"
+Library spatial_index
   Path: src
   Pack: true
-  Modules: BoundingBox, RTree, RTree_intf
+  Modules: Bounding_box, Rtree, Rtree_intf
   BuildDepends: threads, core
 
 Executable test
@@ -19,9 +19,9 @@ Executable test
   Build$: flag(tests)
   CompiledObject: best
   Install: false
-  BuildDepends: SpatialIndex, oUnit
+  BuildDepends: spatial_index, oUnit
 
-Test "SpatialIndexTest"
+Test test
   WorkingDirectory: test
   Run$: flag(tests)
   TestTools: test
