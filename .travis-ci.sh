@@ -8,14 +8,9 @@ case "$OCAML_VERSION,$OPAM_VERSION" in
 *) echo Unknown $OCAML_VERSION,$OPAM_VERSION; exit 1 ;;
 esac
 
-case "$OCAML_VERSION" in
-4.00.*) ;;
-*) OPAM_DEPENDS="$OPAM_DEPENDS async async_ssl" ;;
-esac
-
 echo "yes" | sudo add-apt-repository ppa:$ppa
 sudo apt-get update -qq
-sudo apt-get install -qq ocaml ocaml-native-compilers camlp4-extra opam time libssl-dev
+sudo apt-get install -qq ocaml ocaml-native-compilers camlp4-extra opam
 export OPAMYES=1
 export OPAMVERBOSE=1
 echo OCaml version
@@ -29,4 +24,3 @@ opam install ${OPAM_DEPENDS}
 eval `opam config env`
 ./configure --enable-tests
 make test
-make clean

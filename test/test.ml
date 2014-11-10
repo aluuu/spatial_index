@@ -22,8 +22,20 @@ let all_tests () =
         Test_rtree.test;
         Test_rtree_functor.test])
 
-let main () =
-  ignore (run_test_tt_main
-            (all_tests ()):OUnit.test_result list)
+let rec was_successful =
+  function
+  | [] -> true
+  | RSuccess _::t
+  | RSkip _::t ->
+     was_successful t
+  | RFailure _::_
+  | RError _::_
+  | RTodo _::_ ->
+     false
 
-let () = Core.Exn.handle_uncaught ~exit:true main
+let () =
+  if (not
+        (was_successful
+           (run_test_tt_main
+              (all_tests ()):OUnit.test_result list))) then
+    exit 1
