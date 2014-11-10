@@ -1,26 +1,26 @@
 open Core.Std
 
-module BoundingBox = BoundingBox
-
 let max_nodes = 8
 
+module Bounding_box = Bounding_box
+
 type 'a t = Empty |
-            Node of (BoundingBox.t * 'a t) list |
-            Leaf of (BoundingBox.t * 'a) list
+            Node of (Bounding_box.t * 'a t) list |
+            Leaf of (Bounding_box.t * 'a) list
 
 let empty = Empty
 
-let empty_node = (BoundingBox.empty, Empty)
+let empty_node = (Bounding_box.empty, Empty)
 
 let bounding_box_of_nodes nodes =
-  BoundingBox.union_many (List.map ~f:(fun (bb, _) -> bb) nodes)
+  Bounding_box.union_many (List.map ~f:(fun (bb, _) -> bb) nodes)
 
 let bounding_box_delta bb bb' =
-  (BoundingBox.area (BoundingBox.union bb bb')) -. BoundingBox.area bb
+  (Bounding_box.area (Bounding_box.union bb bb')) -. Bounding_box.area bb
 
 let bounding_box_distance (bb1, _) (bb2, _) =
-  (BoundingBox.area (BoundingBox.union bb1 bb2)) -.
-    (BoundingBox.area bb1) -. (BoundingBox.area bb2)
+  (Bounding_box.area (Bounding_box.union bb1 bb2)) -.
+    (Bounding_box.area bb1) -. (Bounding_box.area bb2)
 
 let rec size = function
   | Empty -> 0
@@ -84,9 +84,9 @@ let quadratic_split nodes =
        let delta_n = bounding_box_delta bb ns_bb in
        let delta_m = bounding_box_delta bb ms_bb in
        if delta_n < delta_m then
-         split (BoundingBox.union ns_bb bb) (n :: ns) ms_bb ms nodes'
+         split (Bounding_box.union ns_bb bb) (n :: ns) ms_bb ms nodes'
        else
-         split ns_bb ns (BoundingBox.union ms_bb bb) (n :: ms) nodes' in
+         split ns_bb ns (Bounding_box.union ms_bb bb) (n :: ms) nodes' in
   match nodes with
   | [] -> failwith "Can't split empty list"
   | _ ->
@@ -136,7 +136,7 @@ let delete tree record =
 
 let rec search tree bb =
   let filter_overlapping bb nodes =
-    List.filter ~f:(fun (bb', _) -> BoundingBox.overlaps bb' bb) nodes in
+    List.filter ~f:(fun (bb', _) -> Bounding_box.overlaps bb' bb) nodes in
   match tree with
   | Empty -> []
   | Node nodes ->

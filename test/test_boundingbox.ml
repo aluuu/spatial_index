@@ -1,9 +1,9 @@
 open Core.Std
 open OUnit
-open SpatialIndex.BoundingBox
+open Spatial_index.Bounding_box
 
 let test =
-  "BoundingBox" >::: [
+  "Bounding_box" >::: [
 
     "bb1 overlaps bb2" >:: (fun () ->
              let bb1 = ((0.0, 0.0), (500.0, 500.0)) in

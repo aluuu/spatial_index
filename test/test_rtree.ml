@@ -1,6 +1,6 @@
 open Core.Std
 open OUnit
-open SpatialIndex.RTree
+open Spatial_index.Rtree
 
 let test_simple_search () =
   let tree =
@@ -63,7 +63,7 @@ let test_delete () =
   failwith "not implemented"
 
 let test =
-  "RTree" >::: [
+  "Rtree" >::: [
     "simple search" >:: test_simple_search;
     "insert" >:: test_insert;
     "lookup" >:: test_lookup;

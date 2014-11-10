@@ -1,6 +1,6 @@
 open Core.Std
 
-module BoundingBox: sig
+module Bounding_box: sig
   type c = float * float
   type t = c * c
   val empty: t
@@ -11,37 +11,37 @@ module BoundingBox: sig
 end
 
 type 'a t = Empty |
-            Node of (BoundingBox.t * 'a t) list |
-            Leaf of (BoundingBox.t * 'a) list
+            Node of (Bounding_box.t * 'a t) list |
+            Leaf of (Bounding_box.t * 'a) list
 
 val empty: 'a t
 
-val empty_node: BoundingBox.t * 'a t
+val empty_node: Bounding_box.t * 'a t
 
-val bounding_box_of_nodes: (BoundingBox.t * 'b) list -> BoundingBox.t
+val bounding_box_of_nodes: (Bounding_box.t * 'b) list -> Bounding_box.t
 
-val bounding_box_delta: BoundingBox.t -> BoundingBox.t -> float
+val bounding_box_delta: Bounding_box.t -> Bounding_box.t -> float
 
 val bounding_box_distance:
-  (BoundingBox.t * 'b) -> (BoundingBox.t * 'b) -> float
+  (Bounding_box.t * 'b) -> (Bounding_box.t * 'b) -> float
 
 val size: 'a t -> int
 
 val partition_by_min_delta:
-  (BoundingBox.t * 'a t) list -> BoundingBox.t ->
-  (BoundingBox.t * 'a t) * (BoundingBox.t * 'a t) list
+  (Bounding_box.t * 'a t) list -> Bounding_box.t ->
+  (Bounding_box.t * 'a t) * (Bounding_box.t * 'a t) list
 
 val quadratic_split:
-  (BoundingBox.t * 'a) list ->
-  (BoundingBox.t * (BoundingBox.t * 'a) list) *
-    (BoundingBox.t * (BoundingBox.t *'a) list)
+  (Bounding_box.t * 'a) list ->
+  (Bounding_box.t * (Bounding_box.t * 'a) list) *
+    (Bounding_box.t * (Bounding_box.t *'a) list)
 
 val insert':
-  'a t -> BoundingBox.t -> 'a ->
-  (BoundingBox.t * 'a t) * (BoundingBox.t * 'a t)
+  'a t -> Bounding_box.t -> 'a ->
+  (Bounding_box.t * 'a t) * (Bounding_box.t * 'a t)
 
-val insert: 'a t -> BoundingBox.t -> 'a -> 'a t
+val insert: 'a t -> Bounding_box.t -> 'a -> 'a t
 
 val delete: 'a t -> 'a -> 'a t
 
-val search: 'a t -> BoundingBox.t -> 'a list
+val search: 'a t -> Bounding_box.t -> 'a list

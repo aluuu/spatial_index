@@ -1,10 +1,10 @@
 open Core.Std
 open OUnit
-open SpatialIndex
+open Spatial_index
 
-type sample_type = Sample of string * BoundingBox.t
+type sample_type = Sample of string * Bounding_box.t
 
-module SampleRTree = RTree_intf.Make(struct
+module SampleRTree = Rtree_intf.Make(struct
                                  type t = sample_type
                                  let bounding_box (Sample (_, bb)) = bb
                                end)
