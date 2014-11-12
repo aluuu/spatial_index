@@ -1,3 +1,3 @@
-Authors of SpatialIndex:
+Authors of spatial_index:
 
 * Alexander Dinu
