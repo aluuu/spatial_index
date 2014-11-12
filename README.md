@@ -2,6 +2,7 @@ spatial_index
 =============
 
 [![Build Status](https://travis-ci.org/aluuu/spatial_index.svg?branch=master)](https://travis-ci.org/aluuu/spatial_index)
+
 Implementation of several spatial indexes in OCaml. Currently only R-tree index implemented.
 
 See the file [INSTALL.md](INSTALL.md) for building and installation
