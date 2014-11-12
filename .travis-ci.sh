@@ -1,4 +1,4 @@
-OPAM_DEPENDS="oasis core"
+OPAM_DEPENDS="core"
 
 case "$OCAML_VERSION,$OPAM_VERSION" in
 4.00.1,1.0.0) ppa=avsm/ocaml40+opam10 ;;
@@ -27,5 +27,6 @@ opam --git-version
 opam init git://github.com/ocaml/opam-repository >/dev/null 2>&1
 opam install ${OPAM_DEPENDS}
 eval `opam config env`
-./configure --enable-tests
-make test
+ocaml setup.ml -configure --enable-tests
+ocaml setup.ml -build
+ocaml setup.ml -test
