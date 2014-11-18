@@ -26,3 +26,13 @@ Test test
   Run$: flag(tests)
   TestTools: test
   Command: $test
+
+Document api
+  Title: API reference for Osm_xml
+  Type: ocamlbuild (0.3)
+  Install: true
+  InstallDir: $htmldir
+  BuildTools+: ocamldoc
+  XOCamlbuildPath: src/
+  XOCamlbuildLibraries: spatial_index
+  PostCommand: cp ./doc/style.css ./api.docdir/style.css

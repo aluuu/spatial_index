@@ -1,0 +1,6 @@
+# OASIS_START
+# DO NOT EDIT (digest: 2b7585169523c6667ed03bd3127ff0c9)
+../src/Bounding_box
+../src/Rtree
+../src/Rtree_intf
+# OASIS_STOP
