@@ -1,4 +1,5 @@
 open Core.Std
+open Rtree_intf
 
 module Bounding_box: sig
   type c = float * float
@@ -42,3 +43,13 @@ val insert': ?max_nodes:(int) -> 'a t -> Bounding_box.t -> 'a ->
 val insert: ?max_nodes:(int) -> 'a t -> Bounding_box.t -> 'a -> 'a t
 
 val search: 'a t -> Bounding_box.t -> 'a list
+
+module Make: functor (P: Rtree_params) (B: Boundable) ->
+  sig
+    type a = B.t
+    type t
+    val empty: t
+    val size: t -> int
+    val insert: t -> a -> t
+    val search: t -> Bounding_box.t -> a list
+  end
