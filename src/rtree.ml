@@ -1,7 +1,5 @@
 open Core.Std
 
-let max_nodes = 8
-
 module Bounding_box = Bounding_box
 
 type 'a t = Empty |
@@ -94,7 +92,7 @@ let quadratic_split nodes =
      let rest = List.filter ~f:(fun n -> n <> s1 && n <> s2) nodes in
      split bb1 [s1] bb2 [s2] rest
 
-let rec insert' tree bb record = match tree with
+let rec insert' ?max_nodes:(max_nodes=8) tree bb record = match tree with
   | Node nodes ->
      begin
        let (_, min_tree), other_trees =
@@ -126,8 +124,8 @@ let rec insert' tree bb record = match tree with
      end
   | Empty -> (bb, Leaf [(bb, record)]), empty_node
 
-let insert tree bb record =
-  match insert' tree bb record with
+let insert ?max_nodes:(max_nodes=8) tree bb record =
+  match insert' ~max_nodes:max_nodes tree bb record with
   | (_, n), (_, Empty) -> n
   | n, m -> Node [n; m]
 

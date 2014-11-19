@@ -36,10 +36,9 @@ val quadratic_split:
   (Bounding_box.t * (Bounding_box.t * 'a) list) *
     (Bounding_box.t * (Bounding_box.t *'a) list)
 
-val insert':
-  'a t -> Bounding_box.t -> 'a ->
-  (Bounding_box.t * 'a t) * (Bounding_box.t * 'a t)
+val insert': ?max_nodes:(int) -> 'a t -> Bounding_box.t -> 'a ->
+             (Bounding_box.t * 'a t) * (Bounding_box.t * 'a t)
 
-val insert: 'a t -> Bounding_box.t -> 'a -> 'a t
+val insert: ?max_nodes:(int) -> 'a t -> Bounding_box.t -> 'a -> 'a t
 
 val search: 'a t -> Bounding_box.t -> 'a list
