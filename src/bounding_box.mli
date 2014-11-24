@@ -1,15 +1,15 @@
 open Core.Std
+open Bounding_box_intf
 
-type c = float * float
+module type Numeric =
+  sig
+    type t
+    val zero: t
+    val (+): t -> t -> t
+    val (-): t -> t -> t
+    val ( * ): t -> t -> t
+    val min: t -> t -> t
+    val max: t -> t -> t
+  end
 
-type t = c * c
-
-val empty: t
-
-val area: t -> float
-
-val overlaps: t -> t -> bool
-
-val union: t -> t -> t
-
-val union_many: t list -> t
+module Make (Num: Numeric) : S with type a = Num.t
