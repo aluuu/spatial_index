@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="Rtree_intf.Rtree_params.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Bounding_box_intf" rel="Chapter" href="Bounding_box_intf.html">
+<link title="Bounding_box" rel="Chapter" href="Bounding_box.html">
+<link title="Rtree_intf" rel="Chapter" href="Rtree_intf.html">
+<link title="Rtree" rel="Chapter" href="Rtree.html"><title>Rtree_intf.Rtree_params.Bounding_box</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Rtree_intf.Rtree_params.html" title="Rtree_intf.Rtree_params">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Rtree_intf.Rtree_params.Bounding_box.html">Rtree_intf.Rtree_params.Bounding_box</a></h1>
+
+<pre><span class="keyword">module</span> Bounding_box: <code class="type"><a href="Bounding_box_intf.S.html">Bounding_box_intf.S</a></code><code class="type"> </code></pre><hr width="100%">
+
+<pre><span class="keyword">module</span> <a href="Bounding_box_intf.S.Num.html">Num</a>: <code class="type"><a href="Bounding_box_intf.Numeric_S.html">Bounding_box_intf.Numeric_S</a></code><code class="type"> </code></pre>
+<pre><span id="TYPEa"><span class="keyword">type</span> <code class="type"></code>a</span> = <code class="type">Num.t</code> </pre>
+
+
+<pre><span id="TYPEc"><span class="keyword">type</span> <code class="type"></code>c</span> = <code class="type"><a href="Bounding_box_intf.S.html#TYPEa">a</a> * <a href="Bounding_box_intf.S.html#TYPEa">a</a></code> </pre>
+
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> = <code class="type"><a href="Bounding_box_intf.S.html#TYPEc">c</a> * <a href="Bounding_box_intf.S.html#TYPEc">c</a></code> </pre>
+
+
+<pre><span id="VALempty"><span class="keyword">val</span> empty</span> : <code class="type"><a href="Bounding_box_intf.S.html#TYPEt">t</a></code></pre>
+<pre><span id="VALarea"><span class="keyword">val</span> area</span> : <code class="type"><a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEa">a</a></code></pre>
+<pre><span id="VALoverlaps"><span class="keyword">val</span> overlaps</span> : <code class="type"><a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALunion"><span class="keyword">val</span> union</span> : <code class="type"><a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEt">t</a></code></pre>
+<pre><span id="VALunion_many"><span class="keyword">val</span> union_many</span> : <code class="type"><a href="Bounding_box_intf.S.html#TYPEt">t</a> list -> <a href="Bounding_box_intf.S.html#TYPEt">t</a></code></pre>
+<pre><span id="VALdelta"><span class="keyword">val</span> delta</span> : <code class="type"><a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEa">a</a></code></pre>
+<pre><span id="VALdistance"><span class="keyword">val</span> distance</span> : <code class="type"><a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEt">t</a> -> <a href="Bounding_box_intf.S.html#TYPEa">a</a></code></pre></body></html>

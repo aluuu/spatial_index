@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="Rtree_intf.S.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Bounding_box_intf" rel="Chapter" href="Bounding_box_intf.html">
+<link title="Bounding_box" rel="Chapter" href="Bounding_box.html">
+<link title="Rtree_intf" rel="Chapter" href="Rtree_intf.html">
+<link title="Rtree" rel="Chapter" href="Rtree.html"><title>Rtree_intf.S.Tree</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Rtree_intf.S.html" title="Rtree_intf.S">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Rtree_intf.S.Tree.html">Rtree_intf.S.Tree</a></h1>
+
+<pre><span class="keyword">module</span> Tree: <code class="type"><a href="Rtree_intf.Tree_S.html">Rtree_intf.Tree_S</a></code><code class="type"> </code></pre><hr width="100%">
+
+<pre><span id="TYPEbb"><span class="keyword">type</span> <code class="type"></code>bb</span> </pre>
+
+
+<pre><code><span id="TYPEt"><span class="keyword">type</span> <code class="type">'a</code> t</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.Empty"><span class="constructor">Empty</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.Node"><span class="constructor">Node</span></span> <span class="keyword">of</span> <code class="type">(<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a>) list</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.Leaf"><span class="constructor">Leaf</span></span> <span class="keyword">of</span> <code class="type">(<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a) list</code></code></td>
+
+</tr></table>
+
+
+
+<pre><span id="VALempty"><span class="keyword">val</span> empty</span> : <code class="type">'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a></code></pre>
+<pre><span id="VALempty_node"><span class="keyword">val</span> empty_node</span> : <code class="type"><a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a></code></pre>
+<pre><span id="VALbounding_box_of_nodes"><span class="keyword">val</span> bounding_box_of_nodes</span> : <code class="type">(<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'b) list -> <a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a></code></pre>
+<pre><span id="VALsize"><span class="keyword">val</span> size</span> : <code class="type">'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a> -> int</code></pre>
+<pre><span id="VALpartition_by_min_delta"><span class="keyword">val</span> partition_by_min_delta</span> : <code class="type">(<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a>) list -><br>       <a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> -><br>       (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a>) *<br>       (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a>) list</code></pre>
+<pre><span id="VALquadratic_split"><span class="keyword">val</span> quadratic_split</span> : <code class="type">(<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a) list -><br>       (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a) list) *<br>       (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a) list)</code></pre>
+<pre><span id="VALinsert'"><span class="keyword">val</span> insert'</span> : <code class="type">?max_nodes:int -><br>       'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a> -><br>       <a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> -><br>       'a -><br>       (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a>) *<br>       (<a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> * 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a>)</code></pre>
+<pre><span id="VALinsert"><span class="keyword">val</span> insert</span> : <code class="type">?max_nodes:int -><br>       'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a> -><br>       <a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> -> 'a -> 'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a></code></pre>
+<pre><span id="VALsearch"><span class="keyword">val</span> search</span> : <code class="type">'a <a href="Rtree_intf.Tree_S.html#TYPEt">t</a> -> <a href="Rtree_intf.Tree_S.html#TYPEbb">bb</a> -> 'a list</code></pre></body></html>

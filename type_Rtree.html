@@ -6,50 +6,40 @@
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
 <link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Bounding_box_intf" rel="Chapter" href="Bounding_box_intf.html">
 <link title="Bounding_box" rel="Chapter" href="Bounding_box.html">
-<link title="Rtree" rel="Chapter" href="Rtree.html">
-<link title="Rtree_intf" rel="Chapter" href="Rtree_intf.html"><title>Rtree</title>
+<link title="Rtree_intf" rel="Chapter" href="Rtree_intf.html">
+<link title="Rtree" rel="Chapter" href="Rtree.html"><title>Rtree</title>
 </head>
 <body>
 <code class="code"><span class="keyword">sig</span><br>
-&nbsp;&nbsp;<span class="keyword">module</span>&nbsp;<span class="constructor">Bounding_box</span>&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">sig</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;c&nbsp;=&nbsp;float&nbsp;*&nbsp;float<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;t&nbsp;=&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.c&nbsp;*&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.c<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;empty&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;area&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;overlaps&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;union&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;union_many&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><br>
-&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;t&nbsp;=<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Empty</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Node</span>&nbsp;<span class="keyword">of</span>&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t)&nbsp;list<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Leaf</span>&nbsp;<span class="keyword">of</span>&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;empty&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;empty_node&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bounding_box_of_nodes&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>b)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bounding_box_delta&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bounding_box_distance&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;size&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;partition_by_min_delta&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t)&nbsp;*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t)&nbsp;list<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;quadratic_split&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list)&nbsp;*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list)<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;insert'&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t)&nbsp;*&nbsp;(<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t)<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;insert&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t<br>
-&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;search&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Rtree</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">module</span>&nbsp;<span class="constructor">Tree</span>&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">functor</span>&nbsp;(<span class="constructor">BB</span>&nbsp;:&nbsp;<span class="constructor">Bounding_box_intf</span>.<span class="constructor">S</span>)&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">sig</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;bb&nbsp;=&nbsp;<span class="constructor">BB</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;t&nbsp;=&nbsp;<span class="constructor">Empty</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Node</span>&nbsp;<span class="keyword">of</span>&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;t)&nbsp;list&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Leaf</span>&nbsp;<span class="keyword">of</span>&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;empty&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;empty_node&nbsp;:&nbsp;bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bounding_box_of_nodes&nbsp;:&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>b)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bb<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;size&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;partition_by_min_delta&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;t)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bb&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;t)&nbsp;*&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;t)&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;quadratic_split&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(bb&nbsp;*&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list)&nbsp;*&nbsp;(bb&nbsp;*&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a)&nbsp;list)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;insert'&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?max_nodes:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bb&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;t)&nbsp;*&nbsp;(bb&nbsp;*&nbsp;<span class="keywordsign">'</span>a&nbsp;t)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;insert&nbsp;:&nbsp;?max_nodes:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bb&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;search&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bb&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><br>
+&nbsp;&nbsp;<span class="keyword">module</span>&nbsp;<span class="constructor">Make</span>&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">functor</span>&nbsp;(<span class="constructor">P</span>&nbsp;:&nbsp;<span class="constructor">Rtree_intf</span>.<span class="constructor">Rtree_params</span>)&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">sig</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">module</span>&nbsp;<span class="constructor">Tree</span>&nbsp;:&nbsp;<span class="constructor">Rtree_intf</span>.<span class="constructor">Tree_S</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;a&nbsp;=&nbsp;<span class="constructor">P</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;t&nbsp;=&nbsp;<span class="constructor">P</span>.t&nbsp;<span class="constructor">Tree</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;empty&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Make</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;size&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Make</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;insert&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Make</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Make</span>.a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Make</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;search&nbsp;:&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Make</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">P</span>.<span class="constructor">Bounding_box</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Rtree</span>.<span class="constructor">Make</span>.a&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><br>
 <span class="keyword">end</span></code></body></html>
