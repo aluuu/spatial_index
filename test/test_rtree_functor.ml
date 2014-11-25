@@ -4,9 +4,10 @@ open Spatial_index
 
 type sample_type = Sample of string * Bounding_box.t
 
-module SampleRTree = Rtree.Make(struct let max_nodes = 16 end)
-                               (struct
+module SampleRTree = Rtree.Make(struct
                                  type t = sample_type
+                                 module Bounding_box = Bounding_box
+                                 let max_nodes = 8
                                  let bounding_box (Sample (_, bb)) = bb
                                end)
 

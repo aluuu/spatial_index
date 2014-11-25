@@ -1,6 +1,20 @@
+module type Numeric_S =
+  sig
+    type t
+    val zero: t
+    val (+): t -> t -> t
+    val (-): t -> t -> t
+    val ( * ): t -> t -> t
+    val (>=): t -> t -> bool
+    val min: t -> t -> t
+    val max: t -> t -> t
+    val abs: t -> t
+  end
+
 module type S =
   sig
-    type a
+    module Num: Numeric_S
+    type a = Num.t
     type c = a * a
     type t = c * c
     val empty: t
@@ -8,4 +22,6 @@ module type S =
     val overlaps: t -> t -> bool
     val union: t -> t -> t
     val union_many: t list -> t
+    val delta: t -> t -> a
+    val distance: t -> t -> a
   end

@@ -1,22 +1,13 @@
 open Core.Std
+open Bounding_box_intf
 
-module type Numeric =
-  sig
-    type t
-    val zero: t
-    val (+): t -> t -> t
-    val (-): t -> t -> t
-    val ( * ): t -> t -> t
-    val (>=): t -> t -> bool
-    val min: t -> t -> t
-    val max: t -> t -> t
-  end
-
-module Make (Num: Numeric) =
+module Make (Num: Numeric_S) =
   struct
     type a = Num.t
     type c = a * a
     type t = c * c
+
+    module Num = Num
 
     let empty = ((Num.zero, Num.zero), (Num.zero, Num.zero))
 
@@ -37,6 +28,14 @@ module Make (Num: Numeric) =
     let union_many = function
       | [] -> empty
       | boxes -> List.fold_left boxes ~f:union ~init:(List.hd_exn boxes)
+
+    let delta bb bb' =
+      let open Num in
+      (area (union bb bb')) - area bb
+
+    let distance bb bb' =
+      let open Num in
+      (area (union bb bb')) - (area bb) - (area bb')
   end
 
 module Bounding_box =
@@ -49,6 +48,7 @@ module Bounding_box =
         let (>=) = (>=)
         let min = min
         let max = max
+        let abs = Float.abs
       end)
 
 include Bounding_box
