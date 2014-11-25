@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 634ec975dbbe675fd347a1d362876533)
+# DO NOT EDIT (digest: c7067f78af34df81e2c76d51c848a563)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -16,6 +16,7 @@ true: annot, bin_annot
 "_darcs": not_hygienic
 # Library spatial_index
 "src/spatial_index.cmxs": use_spatial_index
+"src/bounding_box_intf.cmx": for-pack(Spatial_index)
 "src/bounding_box.cmx": for-pack(Spatial_index)
 "src/rtree_intf.cmx": for-pack(Spatial_index)
 "src/rtree.cmx": for-pack(Spatial_index)
