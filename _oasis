@@ -1,6 +1,6 @@
 OASISFormat: 0.4
 Name:        spatial_index
-Version:     0.0.1
+Version:     0.0.2
 Synopsis:    Implementation of several spatial indexes
 Authors:     Alexander Dinu
 License:     BSD-3-clause

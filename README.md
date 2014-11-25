@@ -28,6 +28,28 @@ TODO
 3. Hilbert R-tree
 4. ???
 
+Changelog
+----------
+
+### 0.0.2
+
+**NOTE**: This version breaks compatability with version 0.0.1.
+
+Now there's no default implementation for Rtree. This means that you **must** create it with something like this:
+
+```ocaml
+module My_rtree = Rtree.Make(Some_module : Spatial_index.Rtree_intf.S)
+open My_rtree
+```
+
+* R-Tree implementation with functor.
+* Bounding box implementation with functor: now its possible to change type of bounding box units from `float` to any other numeric type.
+
+### 0.0.1
+
+* basic R-Tree implementation
+
+
 Copyright and license
 ---------------------
 

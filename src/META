@@ -1,6 +1,6 @@
 # OASIS_START
-# DO NOT EDIT (digest: 88bb3f60513dcecd961107c03f4e8484)
-version = "0.0.1"
+# DO NOT EDIT (digest: 2a70c0d97c0e863f30b4a98f7458f3d6)
+version = "0.0.2"
 description = "Implementation of several spatial indexes"
 requires = "threads core"
 archive(byte) = "spatial_index.cma"
