@@ -19,6 +19,7 @@ let all_tests () =
   flatten
     (TestList
        [Test_bounding_box.test;
+        Test_bounding_box_int.test;
         Test_rtree_functor.test])
 
 let rec was_successful =
