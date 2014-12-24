@@ -20,7 +20,8 @@ let all_tests () =
     (TestList
        [Test_bounding_box.test;
         Test_bounding_box_int.test;
-        Test_rtree_functor.test])
+        Test_rtree_functor.test;
+        Test_quadtree_functor.test])
 
 let rec was_successful =
   function
