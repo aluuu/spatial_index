@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 open Rtree_intf
 
 module Tree (BB: Bounding_box_intf.S) =
@@ -143,7 +143,6 @@ module Make (P: Rtree_params) =
   struct
     (* module Bounding_box = P.Bounding_box *)
     module Tree = Tree (P.Bounding_box)
-    open Tree
     (* type bb = P.Bounding_box.t *)
     type a = P.t
     type t = a Tree.t

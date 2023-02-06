@@ -1,4 +1,3 @@
-open Core.Std
 open Rtree_intf
 
 module Tree (BB: Bounding_box_intf.S) : Tree_S

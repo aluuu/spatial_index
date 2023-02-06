@@ -1,8 +1,9 @@
-open Core.Std
+open Core
 open OUnit
+open Spatial_index
 
 module Bounding_box_int =
-  Spatial_index.Bounding_box.Make(
+  Bounding_box.Make(
       struct
         type t = Int.t
         let zero = 0

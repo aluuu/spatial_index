@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 open Bounding_box_intf
 
 module Make (Num: Numeric_S) =

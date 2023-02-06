@@ -1,4 +1,3 @@
-open Core.Std
 open OUnit
 open Spatial_index.Bounding_box
 

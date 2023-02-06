@@ -1,0 +1,13 @@
+(test
+ (name test)
+ (libraries core spatial_index ounit2))
+
+(rule
+ (deps
+  test.ml
+  test_bounding_box.ml
+  test_bounding_box_int.ml
+  test_rtree_functor.ml)
+ (alias runtest)
+ (action
+  (run ./test.exe)))

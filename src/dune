@@ -1,0 +1,5 @@
+(library
+ (public_name spatial_index)
+ (name spatial_index)
+ (libraries core threads)
+ (wrapped true))

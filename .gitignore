@@ -4,3 +4,4 @@
 /*.native
 /*.byte
 /api.docdir
+.merlin
