@@ -31,7 +31,7 @@ module Make (Num: Numeric_S) =
 
     let delta bb bb' =
       let open Num in
-      (area (union bb bb')) - area bb
+      (area (union bb bb')) - (area bb)
 
     let distance bb bb' =
       let open Num in
@@ -39,16 +39,6 @@ module Make (Num: Numeric_S) =
   end
 
 module Bounding_box =
-  Make(struct
-        type t = Float.t
-        let zero = 0.0
-        let (+) = Float.add
-        let (-) = Float.sub
-        let ( * ) = Float.scale
-        let (>=) = (>=)
-        let min = min
-        let max = max
-        let abs = Float.abs
-      end)
+  Make(Core.Float)
 
 include Bounding_box

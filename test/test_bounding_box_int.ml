@@ -1,20 +1,8 @@
-open Core
 open OUnit
 open Spatial_index
 
 module Bounding_box_int =
-  Bounding_box.Make(
-      struct
-        type t = Int.t
-        let zero = 0
-        let (+) = Int.(+)
-        let (-) = Int.(-)
-        let ( * ) = Int.( * )
-        let (>=) = (>=)
-        let min = min
-        let max = max
-        let abs = Int.abs
-      end)
+  Bounding_box.Make(Core.Int)
 
 open Bounding_box_int
 

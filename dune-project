@@ -1,4 +1,4 @@
-(lang dune 2.3)
+(lang dune 2.9)
 
 (name spatial_index)
 (version 0.0.2)
@@ -16,8 +16,6 @@
  (name spatial_index)
  (synopsis " Implementation of several spatial indexes (R-tree, etc.)")
  (depends
-  (dune (= 2.3.1))
-  (ocaml (< 4.08.0))
-  (ounit2 :with-test)
-  (spawn (= v0.12.0))
-  (core (< v0.12.0))))
+  dune
+  core
+  (ounit2 :with-test)))

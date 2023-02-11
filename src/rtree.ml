@@ -28,6 +28,7 @@ module Tree (BB: Bounding_box_intf.S) =
       | [] ->
          raise (Invalid_argument "cannot partition an empty node")
       | _ ->
+         let open BB.Num in
          let deltas =
            List.map
              ~f:(fun node -> (BB.delta bb (fst node), node))
@@ -38,6 +39,7 @@ module Tree (BB: Bounding_box_intf.S) =
            deltas
            |> List.find_exn ~f:(Fn.compose ((=) min_delta) fst) in
          let others =
+           let open Core.Poly in
            deltas
            |> List.filter ~f:(fun (_, n) -> n <> min_delta_node)
            |> List.map ~f:snd in
@@ -53,10 +55,10 @@ module Tree (BB: Bounding_box_intf.S) =
             ~f:(fun (((bb, _) as n), ((bb', _) as n')) ->
                 ((BB.distance bb bb'), (n, n'))) pairs in
         let max_distance =
-          distances |> List.map ~f:fst |> List.reduce_exn ~f:max in
+          distances |> List.map ~f:fst |> List.reduce_exn ~f:BB.Num.max in
         let (_, (n, n')) =
           distances
-          |> List.find_exn ~f:(Fn.compose ((=) max_distance) fst) in
+          |> List.find_exn ~f:(Fn.compose (BB.Num.(=) max_distance) fst) in
         n, n' in
       let pick_next bb bb' = function
         (* originally `PickNext` in [1] *)
@@ -65,10 +67,10 @@ module Tree (BB: Bounding_box_intf.S) =
            let diff (bb'', _) =
              BB.Num.abs (BB.Num.(-) (BB.delta bb bb'') (BB.delta bb' bb'')) in
            let diffs = List.map ~f:(fun n -> (diff n, n)) nodes in
-           let max_diff = diffs |> List.map ~f:fst |> List.reduce_exn ~f:max in
+           let max_diff = diffs |> List.map ~f:fst |> List.reduce_exn ~f:BB.Num.max in
            let (_, max_diff_node) =
              diffs
-             |> List.find_exn ~f:(Fn.compose ((=) max_diff) fst) in
+             |> List.find_exn ~f:(Fn.compose (BB.Num.(=) max_diff) fst) in
            max_diff_node in
       let rec split ns_bb ns ms_bb ms = function
         | [] -> (ns_bb, ns), (ms_bb, ms)
@@ -77,13 +79,14 @@ module Tree (BB: Bounding_box_intf.S) =
            let nodes' = List.filter ~f:(Fn.compose not (phys_equal n)) nodes in
            let delta_n = BB.delta bb ns_bb in
            let delta_m = BB.delta bb ms_bb in
-           if delta_n < delta_m then
+           if BB.Num.(>=) delta_m delta_n then
              split (BB.union ns_bb bb) (n :: ns) ms_bb ms nodes'
            else
              split ns_bb ns (BB.union ms_bb bb) (n :: ms) nodes' in
       match nodes with
       | [] -> failwith "Can't split empty list"
       | _ ->
+         let open Core.Poly in
          let (((bb1, _) as s1), ((bb2, _) as s2)) = pick_seeds nodes in
          let rest = List.filter ~f:(fun n -> n <> s1 && n <> s2) nodes in
          split bb1 [s1] bb2 [s2] rest

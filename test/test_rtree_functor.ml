@@ -1,4 +1,5 @@
 open Core
+open Core.Poly
 open OUnit
 open Spatial_index
 

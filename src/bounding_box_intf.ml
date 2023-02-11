@@ -6,6 +6,7 @@ module type Numeric_S =
     val (-): t -> t -> t
     val ( * ): t -> t -> t
     val (>=): t -> t -> bool
+    val (=): t -> t -> bool
     val min: t -> t -> t
     val max: t -> t -> t
     val abs: t -> t
