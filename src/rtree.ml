@@ -9,6 +9,8 @@ module Tree (BB: Bounding_box_intf.S) =
                 Node of (bb * 'a t) list |
                 Leaf of (bb * 'a) list
 
+    type op_result = Condense | Noop
+
     let empty = Empty
 
     let empty_node = (BB.empty, Empty)
@@ -47,6 +49,7 @@ module Tree (BB: Bounding_box_intf.S) =
 
     let quadratic_split nodes =
       (* originally `QuadraticSplit` in [1] *)
+
       let pick_seeds nodes =
         (* originally `PickSeeds` in [1] *)
         let pairs = List.cartesian_product nodes nodes in
@@ -60,6 +63,7 @@ module Tree (BB: Bounding_box_intf.S) =
           distances
           |> List.find_exn ~f:(Fn.compose (BB.Num.(=) max_distance) fst) in
         n, n' in
+
       let pick_next bb bb' = function
         (* originally `PickNext` in [1] *)
         | [] -> raise (Invalid_argument "can't pick from empty nodes list")
@@ -72,6 +76,7 @@ module Tree (BB: Bounding_box_intf.S) =
              diffs
              |> List.find_exn ~f:(Fn.compose (BB.Num.(=) max_diff) fst) in
            max_diff_node in
+
       let rec split ns_bb ns ms_bb ms = function
         | [] -> (ns_bb, ns), (ms_bb, ms)
         | nodes ->
@@ -83,6 +88,7 @@ module Tree (BB: Bounding_box_intf.S) =
              split (BB.union ns_bb bb) (n :: ns) ms_bb ms nodes'
            else
              split ns_bb ns (BB.union ms_bb bb) (n :: ms) nodes' in
+
       match nodes with
       | [] -> failwith "Can't split empty list"
       | _ ->
@@ -140,17 +146,48 @@ module Tree (BB: Bounding_box_intf.S) =
       | Leaf records ->
          let overlapping = filter_overlapping bb records in
          List.map ~f:snd overlapping
+
+    let delete ?max_nodes:(max_nodes=8) tree bb record =
+      let rec cleanup_node (bb: BB.t) (record: 'a) (t: 'a t) : (op_result * 'a t) =
+        (* TODO: handle Condense *)
+        match t with
+        | Leaf records ->
+           let (matched, rest) =
+             records
+             |> List.partition_map ~f:(fun (bba, a) ->
+                    if (BB.equals bba bb) && (Poly.equal a record)
+                    then First (bba, a)
+                    else Second (bba, a))
+           in
+           if List.is_empty matched then
+             (Noop, t)
+           else begin
+             match max_nodes < List.length rest with
+             | true -> (Condense, Leaf rest)
+             | false -> (Noop, Leaf rest)
+             end
+        | Node nodes ->
+           let nodes = nodes
+                       |> List.map ~f:(fun (node_bb, node) ->
+                              let (_, node') = cleanup_node bb record node
+                              in (node_bb, node'))
+           in
+           (Noop, Node nodes)
+        | Empty -> (Noop, Empty)
+      in
+      match cleanup_node bb record tree with
+      | (Condense, Node [(bb, Leaf [(_, r)])]) -> Leaf [(bb, r)]
+      | (_, r) -> r
   end
 
 module Make (P: Rtree_params) =
   struct
-    (* module Bounding_box = P.Bounding_box *)
     module Tree = Tree (P.Bounding_box)
-    (* type bb = P.Bounding_box.t *)
     type a = P.t
     type t = a Tree.t
     let empty = Tree.empty
     let size = Tree.size
     let insert t a = Tree.insert ~max_nodes:P.max_nodes t (P.bounding_box a) a
     let search = Tree.search
+    let delete t a = Tree.delete ~max_nodes:P.max_nodes t (P.bounding_box a) a
   end

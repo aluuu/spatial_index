@@ -21,6 +21,7 @@ module type S =
     val empty: t
     val area: t -> a
     val overlaps: t -> t -> bool
+    val equals: t -> t -> bool
     val union: t -> t -> t
     val union_many: t list -> t
     val delta: t -> t -> a

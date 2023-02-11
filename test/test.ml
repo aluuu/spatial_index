@@ -10,6 +10,7 @@ let rec flatten_list acc = function
     flatten_list
       (TestLabel (lbl,flatten test)::acc)
       rest
+
 and flatten = function
   | TestCase _ as res  -> res
   | TestLabel (s,test) -> TestLabel (s,flatten test)

@@ -8,10 +8,8 @@ type sample_type = Sample of string * Bounding_box.t
 module SampleRTree =
   Rtree.Make(struct
               type t = sample_type
-
               module Bounding_box = Bounding_box
-
-              let max_nodes = 8
+              let max_nodes = 2
               let bounding_box (Sample (_, bb)) = bb
             end)
 
@@ -27,9 +25,15 @@ let test_samples = [
 ];;
 
 let test_insert () =
-    let tree =
+  let tree =
     List.fold_left test_samples ~init:empty ~f:insert in
   assert_equal (size tree) 6
+
+let test_delete () =
+    let tree = List.fold_left test_samples ~init:empty ~f:(insert) in
+    let tree_wo_one_node = delete tree (List.hd_exn test_samples) in
+    assert_equal (size tree_wo_one_node) 5
+
 
 let test_lookup () =
   let tree =
@@ -63,4 +67,5 @@ let test =
   "RTree functor" >::: [
     "insert" >:: test_insert;
     "lookup" >:: test_lookup;
+    "delete" >:: test_delete;
   ];;

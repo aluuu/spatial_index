@@ -12,4 +12,5 @@ module Make (P: Rtree_params) :
     val size: t -> int
     val insert: t -> a -> t
     val search: t -> P.Bounding_box.t -> a list
+    val delete: t -> a -> t
   end

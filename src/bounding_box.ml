@@ -15,6 +15,12 @@ module Make (Num: Numeric_S) =
       let open Num in
       (x2 - x1) * (y2 - y1)
 
+    let equals ((x1, y1), (x2, y2)) ((x1', y1'), (x2', y2')) =
+      let open Num in
+      let x_equals = x1 = x1' && x2 = x2' in
+      let y_equals = y1 = y1' && y2 = y2' in
+      x_equals && y_equals
+
     let overlaps ((x1, y1), (x2, y2)) ((x1', y1'), (x2', y2')) =
       let open Num in
       let x_overlap = x1' >= x1 && x2' >= x1 && x2 >= x1' && x2 >= x2' in
@@ -38,7 +44,6 @@ module Make (Num: Numeric_S) =
       (area (union bb bb')) - (area bb) - (area bb')
   end
 
-module Bounding_box =
-  Make(Core.Float)
+module Bounding_box = Make(Core.Float)
 
 include Bounding_box
