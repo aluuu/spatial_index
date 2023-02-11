@@ -18,4 +18,4 @@
  (depends
   dune
   core
-  (ounit2 :with-test)))
+  (alcotest :with-test)))

@@ -1,6 +1,6 @@
 (test
  (name test)
- (libraries core spatial_index ounit2))
+ (libraries core spatial_index alcotest))
 
 (rule
  (deps
