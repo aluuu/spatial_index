@@ -1,6 +1,6 @@
 module type Numeric_S =
   sig
-    type t
+    type t [@@deriving show, eq]
     val zero: t
     val (+): t -> t -> t
     val (-): t -> t -> t
@@ -15,13 +15,12 @@ module type Numeric_S =
 module type S =
   sig
     module Num: Numeric_S
-    type a = Num.t
-    type c = a * a
-    type t = c * c
+    type a = Num.t [@@deriving show, eq]
+    type c = a * a [@@deriving eq]
+    type t = c * c [@@deriving eq]
     val empty: t
     val area: t -> a
     val overlaps: t -> t -> bool
-    val equals: t -> t -> bool
     val union: t -> t -> t
     val union_many: t list -> t
     val delta: t -> t -> a

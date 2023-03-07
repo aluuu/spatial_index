@@ -155,7 +155,7 @@ module Tree (BB: Bounding_box_intf.S) =
            let (matched, rest) =
              records
              |> List.partition_map ~f:(fun (bba, a) ->
-                    if (BB.equals bba bb) && (Poly.equal a record)
+                    if (BB.equal bba bb) && (Poly.equal a record)
                     then First (bba, a)
                     else Second (bba, a))
            in

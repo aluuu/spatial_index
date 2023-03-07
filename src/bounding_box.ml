@@ -3,9 +3,9 @@ open Bounding_box_intf
 
 module Make (Num: Numeric_S) =
   struct
-    type a = Num.t
-    type c = a * a
-    type t = c * c
+    type a = Num.t [@@deriving show, eq]
+    type c = a * a [@@deriving show, eq]
+    type t = c * c [@@deriving show, eq]
 
     module Num = Num
 
@@ -14,12 +14,6 @@ module Make (Num: Numeric_S) =
     let area ((x1, y1), (x2, y2)) =
       let open Num in
       (x2 - x1) * (y2 - y1)
-
-    let equals ((x1, y1), (x2, y2)) ((x1', y1'), (x2', y2')) =
-      let open Num in
-      let x_equals = x1 = x1' && x2 = x2' in
-      let y_equals = y1 = y1' && y2 = y2' in
-      x_equals && y_equals
 
     let overlaps ((x1, y1), (x2, y2)) ((x1', y1'), (x2', y2')) =
       let open Num in
@@ -44,6 +38,11 @@ module Make (Num: Numeric_S) =
       (area (union bb bb')) - (area bb) - (area bb')
   end
 
-module Bounding_box = Make(Core.Float)
+module FloatCoordinate = struct
+  include Core.Float
+  type t = Core.Float.t [@@deriving show, eq]
+end
+
+module Bounding_box = Make(FloatCoordinate)
 
 include Bounding_box

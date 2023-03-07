@@ -1,5 +1,6 @@
 (library
  (public_name spatial_index)
  (name spatial_index)
+ (preprocess (pps ppx_deriving.show ppx_deriving.eq))
  (libraries core threads)
  (wrapped true))

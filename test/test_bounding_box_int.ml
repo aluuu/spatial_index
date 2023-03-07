@@ -1,7 +1,12 @@
 open Spatial_index
 
-module Bounding_box_int =
-  Bounding_box.Make(Core.Int)
+module IntCoordinate = struct
+  include Core.Int
+  type t = Core.Int.t [@@deriving show, eq]
+  let show = Format.asprintf "%a" pp
+end
+
+module Bounding_box_int = Bounding_box.Make(IntCoordinate)
 
 open Bounding_box_int
 
